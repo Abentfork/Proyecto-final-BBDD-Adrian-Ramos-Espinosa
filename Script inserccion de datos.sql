@@ -41,10 +41,3 @@ VALUES
 (2, 2, '2024-03-10', 470.00, 'Pagado'),
 (3, 3, '2023-06-20', 610.00, 'Pendiente');
 
-
-DELETE FROM Pagos;
-DELETE FROM Reclamaciones;
-DELETE FROM Polizas;
-DELETE FROM Tipos_Seguro;
-DELETE FROM Clientes;
-DELETE FROM Agentes;
