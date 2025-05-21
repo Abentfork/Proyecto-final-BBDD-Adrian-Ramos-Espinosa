@@ -1,7 +1,6 @@
--- Crear base de datos
-CREATE DATABASE IF NOT EXISTS aseguradora;
+DROP DATABASE aseguradora;
+CREATE DATABASE aseguradora;
 USE aseguradora;
-
 -- Tabla: CLIENTES
 CREATE TABLE Clientes (
     ID_Cliente INT AUTO_INCREMENT PRIMARY KEY,
@@ -27,7 +26,7 @@ CREATE TABLE Polizas (
     Fecha_Inicio DATE NOT NULL,
     Fecha_Fin DATE NOT NULL,
     Prima DECIMAL(10, 2) NOT NULL,
-    Estado ENUM('Activa', 'Vencida', 'Cancelada') NOT NULL DEFAULT 'Activa',
+    Estado VARCHAR(20) NOT NULL DEFAULT 'Activa',
     FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
     FOREIGN KEY (ID_Tipo_Seguro) REFERENCES Tipos_Seguro(ID_Tipo_Seguro)
 );
@@ -38,7 +37,7 @@ CREATE TABLE Reclamaciones (
     ID_Poliza INT NOT NULL,
     Fecha DATE NOT NULL,
     Descripcion TEXT,
-    Estado ENUM('Pendiente', 'Aprobada', 'Rechazada') NOT NULL DEFAULT 'Pendiente',
+    Estado VARCHAR(20) NOT NULL DEFAULT 'Pendiente',
     Monto DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (ID_Poliza) REFERENCES Polizas(ID_Poliza)
 );
@@ -49,7 +48,7 @@ CREATE TABLE Agentes (
     Nombre VARCHAR(100) NOT NULL,
     Email VARCHAR(100),
     Comision DECIMAL(5, 2), -- Porcentaje: ej. 15.25%
-    Estado ENUM('Activo', 'Inactivo') NOT NULL DEFAULT 'Activo'
+    Estado VARCHAR(20) NOT NULL DEFAULT 'Activo'
 );
 
 -- Tabla: PAGOS
@@ -58,6 +57,6 @@ CREATE TABLE Pagos (
     ID_Poliza INT NOT NULL,
     Fecha DATE NOT NULL,
     Monto DECIMAL(10, 2) NOT NULL,
-    Estado ENUM('Pendiente', 'Pagado', 'Retrasado') NOT NULL DEFAULT 'Pendiente',
+    Estado VARCHAR(20) NOT NULL DEFAULT 'Pendiente',
     FOREIGN KEY (ID_Poliza) REFERENCES Polizas(ID_Poliza)
 );
